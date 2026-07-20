@@ -518,16 +518,20 @@
   if (dt_project_table) {
     let tableTitle = document.createElement('h5');
     tableTitle.classList.add('card-title', 'mb-0', 'text-md-start', 'text-center', 'pt-md-0', 'pt-6');
-    tableTitle.innerHTML = 'Project List';
+    tableTitle.innerHTML = 'Administradores';
     var dt_project = new DataTable(dt_project_table, {
-      ajax: assetsPath + 'json/user-profile.json', // JSON file to add data
+      ajax: {
+        url: '/administradores/data',
+        type: 'GET',
+        dataSrc: ''
+      },
       columns: [
         { data: 'id' },
         { data: 'id', orderable: false, render: DataTable.render.select() },
-        { data: 'project_name' },
-        { data: 'project_leader' },
-        { data: 'id' },
-        { data: 'status' },
+        { data: 'logo' },
+        { data: 'cliente' },
+        { data: 'user' },
+        { data: 'password' },
         { data: 'id' }
       ],
       columnDefs: [
@@ -543,123 +547,33 @@
           }
         },
         {
-          // For Checkboxes
-          targets: 1,
-          orderable: false,
-          searchable: false,
-          responsivePriority: 3,
-          checkboxes: true,
-          render: function () {
-            return '<input type="checkbox" class="dt-checkboxes form-check-input">';
-          },
-          checkboxes: {
-            selectAllRender: '<input type="checkbox" class="form-check-input">'
+          project_img: { data: 'logo' },
+          render: function (data, type, full, meta) {
+            return '<img src="http://127.0.0.1:8000/assets/img/avatars/1.png" alt="Avatar" class="rounded-circle">';
           }
         },
         {
-          // Avatar image/badge, Name and post
-          targets: 2,
-          responsivePriority: 4,
+          cliente: { data: 'cliente' },
           render: function (data, type, full, meta) {
-            var userImg = full['project_img'],
-              name = full['project_name'],
-              date = full['date'];
-            var output;
-            if (userImg) {
-              // For Avatar image
-              output =
-                '<img src="' + assetsPath + 'img/icons/brands/' + userImg + '" alt="Avatar" class="rounded-circle">';
-            } else {
-              // For Avatar badge
-              var stateNum = Math.floor(Math.random() * 6);
-              var states = ['success', 'danger', 'warning', 'info', 'primary', 'secondary'];
-              var state = states[stateNum],
-                initials = name.match(/\b\w/g) || [];
-              initials = ((initials.shift() || '') + (initials.pop() || '')).toUpperCase();
-              output = '<span class="avatar-initial rounded-circle bg-label-' + state + '">' + initials + '</span>';
-            }
-            // Creates full output for row
-            var rowOutput =
-              '<div class="d-flex justify-content-left align-items-center">' +
-              '<div class="avatar-wrapper">' +
-              '<div class="avatar avatar-sm me-3">' +
-              output +
-              '</div>' +
-              '</div>' +
-              '<div class="d-flex flex-column gap-50">' +
-              '<span class="text-truncate fw-medium text-heading">' +
-              name +
-              '</span>' +
-              '<small class="text-truncate">' +
-              date +
-              '</small>' +
-              '</div>' +
-              '</div>';
-            return rowOutput;
+            return '<span class="text-heading">' + data + '</span>';
           }
         },
         {
-          // Task
-          targets: 3,
+          user: { data: 'user' },
           render: function (data, type, full, meta) {
-            var task = full['project_leader'];
-            return '<span class="text-heading">' + task + '</span>';
+            return '<span class="text-heading">' + data + '</span>';
           }
         },
         {
-          // Teams
-          targets: 4,
-          orderable: false,
-          searchable: false,
+          password: { data: 'password' },
           render: function (data, type, full, meta) {
-            const team = full['team'];
-            let teamItem = '';
-            let teamCount = 0;
-            // Iterate through team members and generate the list items
-            for (let i = 0; i < team.length; i++) {
-              teamItem += `
-                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="Kim Karlos" class="avatar avatar-sm pull-up">
-                  <img class="rounded-circle" src="${assetsPath}img/avatars/${team[i]}" alt="Avatar">
-                </li>
-              `;
-              teamCount++;
-              if (teamCount > 2) break;
-            }
-            // Check if there are more than 2 team members, and add the remaining avatars
-            if (teamCount > 2) {
-              const remainingAvatars = team.length - 3;
-              if (remainingAvatars > 0) {
-                teamItem += `
-                  <li class="avatar avatar-sm">
-                    <span class="avatar-initial rounded-circle pull-up" data-bs-toggle="tooltip" data-bs-placement="top" title="${remainingAvatars} more">+${remainingAvatars}</span>
-                  </li>
-                `;
-              }
-            }
-            // Combine the team items into the final output
-            const teamOutput = `
-              <div class="d-flex align-items-center">
-                <ul class="list-unstyled d-flex align-items-center avatar-group mb-0 z-2">
-                  ${teamItem}
-                </ul>
-              </div>
-            `;
-            return teamOutput;
+            return '<span class="text-heading">' + data + '</span>';
           }
         },
         {
-          // Label
-          targets: -2,
+          id: { data: 'id' },
           render: function (data, type, full, meta) {
-            const statusNumber = full['status'];
-            return `
-              <div class="d-flex align-items-center">
-                <div class="progress w-100 me-3" style="height: 6px;">
-                  <div class="progress-bar" style="width: ${statusNumber}" aria-valuenow="${statusNumber}" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <span class="text-heading">${statusNumber}</span>
-              </div>
-            `;
+            return '<span class="text-heading">' + data + '</span>';
           }
         },
         {
@@ -765,6 +679,9 @@
     });
   }
 
+
+
+
   // Filter form control to default size
   // ? setTimeout used for project-list table initialization
   setTimeout(() => {
@@ -791,3 +708,47 @@
     });
   }, 100);
 })();
+function cargarAdministradores() {
+  $.ajax({
+    url: "/administradores/data",
+    success: function (response) {
+      pintarCards(response);
+    }
+  });
+}
+function ingresarAdministrador(url) {
+  con
+  window.open(url, '_blank');
+}
+function verDetallesAdministrador(id) {
+  console.log(id);
+}
+function pintarCards(datos) {
+  let html = '';
+  datos.forEach(admin => {
+    html += `
+          <div class="card mb-3 col-md-4 col-3 col-sm-6">
+            <div class="card-header text-center p-4">
+              <img src="${admin.logo}" alt="Logo" class="img-fluid">
+            </div>
+            <div class="card-body text-center p-4">
+              <h5 class="card-title">${admin.cliente}</h5>
+              <p class="card-text">Super Administrador</p>
+              <p class="card-text">${admin.user}</p>
+            </div>
+            <div class="card-footer text-center p-4">
+              <button class="btn btn-primary w-100 mb-2" onclick="ingresarAdministrador(${admin.url})">
+                <i class="ti tabler-login icon-base"></i> Ingresar
+              </button>
+              <button class="btn btn-outline-primary w-100 mb-2" onclick="verDetallesAdministrador(${admin.id})">
+                <i class="ti tabler-eye icon-base"></i> Ver detalles
+              </button> 
+            </div>
+          </div>
+      `;
+  });
+  $('#contenedorAdministradores').html(html);
+}
+$(function () {
+  cargarAdministradores();
+});
