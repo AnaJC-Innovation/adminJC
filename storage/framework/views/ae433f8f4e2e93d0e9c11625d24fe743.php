@@ -53,6 +53,10 @@
     <link rel="stylesheet" href="../../assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css" />
     <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
 
+    <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/@form-validation/form-validation.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/bs-stepper/bs-stepper.css" />
+
     <!-- Page CSS -->
     <link rel="stylesheet" href="../../assets/vendor/css/pages/cards-advance.css" />
 
@@ -109,6 +113,13 @@
     <script src="../../assets/vendor/libs/swiper/swiper.js"></script>
     <script src="../../assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
 
+    <script src="../../assets/vendor/libs/cleave-zen/cleave-zen.js"></script>
+    <script src="../../assets/vendor/libs/select2/select2.js"></script>
+    <script src="../../assets/vendor/libs/@form-validation/popular.js"></script>
+    <script src="../../assets/vendor/libs/@form-validation/bootstrap5.js"></script>
+    <script src="../../assets/vendor/libs/@form-validation/auto-focus.js"></script>
+    <script src="../../assets/vendor/libs/bs-stepper/bs-stepper.js"></script>
+
     <!-- Main JS -->
 
     <script src="../../assets/js/main.js"></script>
@@ -116,7 +127,6 @@
     <!-- Page JS -->
     <script src="../../assets/js/dashboards-analytics.js"></script>
     <!-- Page JS -->
-    <script src="../../assets/vendor/libs/bs-stepper/bs-stepper.js"></script>
     <script src="../../assets/js/pages-pricing.js"></script>
     <script src="../../assets/js/modal-create-app.js"></script>
 </body>

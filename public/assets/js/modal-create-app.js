@@ -4,94 +4,234 @@
 
 'use strict';
 
-document.addEventListener('DOMContentLoaded', function (e) {
-  // Modal id
-  const appModal = document.getElementById('createApp');
 
-  // Credit Card
-  const creditCardMask1 = document.querySelector('.app-credit-card-mask'),
-    expiryDateMask1 = document.querySelector('.app-expiry-date-mask'),
-    cvvMask1 = document.querySelector('.app-cvv-code-mask');
-  let cleave;
+const switchElearning = document.getElementById('activoElearning');
+const contenedor = document.getElementById('datosElearning');
+const switchApp = document.getElementById('activoApp');
+const contenedorApp = document.getElementById('datosApp');
+const switchPlataforma = document.getElementById('activoPlataforma');
+const contenedorPlataforma = document.getElementById('datosPlataforma');
 
-  // Cleave JS card Mask
-  setTimeout(() => {
-    if (creditCardMask1) {
-      creditCardMask1.addEventListener('input', event => {
-        let cleanValue = event.target.value.replace(/\D/g, '');
-        let cardType = getCreditCardType(cleanValue);
-        creditCardMask1.value = formatCreditCard(cleanValue);
-        if (cardType && cardType !== 'unknown' && cardType !== 'general') {
-          document.querySelector('.app-card-type').innerHTML =
-            `<img src="${assetsPath}img/icons/payments/${cardType}-cc.png" height="26"/>`;
-        } else {
-          document.querySelector('.app-card-type').innerHTML = '';
+const campos = [
+  document.getElementById('urlElearning'),
+  document.getElementById('detallesElearning'),
+  document.getElementById('checklistElearning')
+];
+
+const camposApp = [
+  document.getElementById('detallesApp'),
+  document.getElementById('checklistApp')
+];
+
+const camposPlataforma = [
+  document.getElementById('detallesPlataforma'),
+  document.getElementById('checklistPlataforma')
+];
+
+function actualizarElearning() {
+  if (switchElearning.checked) {
+    contenedor.style.display = 'block';
+    campos.forEach(campo => {
+      campo.required = true;
+    });
+  } else {
+    contenedor.style.display = 'none';
+    campos.forEach(campo => {
+      campo.required = false;
+      campo.value = '';
+    });
+  }
+}
+
+function actualizarApp() {
+  if (switchApp.checked) {
+    contenedorApp.style.display = 'block';
+    camposApp.forEach(campo => {
+      campo.required = true;
+    });
+  } else {
+    contenedorApp.style.display = 'none';
+    camposApp.forEach(campo => {
+      campo.required = false;
+      campo.value = '';
+    });
+  }
+}
+
+function actualizarPlataforma() {
+  if (switchPlataforma.checked) {
+    contenedorPlataforma.style.display = 'block';
+
+    camposPlataforma.forEach(campo => {
+      campo.required = true;
+    });
+  } else {
+    contenedorPlataforma.style.display = 'none';
+
+    camposPlataforma.forEach(campo => {
+      campo.required = false;
+      campo.value = '';
+    });
+  }
+}
+// Estado inicial
+actualizarElearning();
+actualizarApp();
+actualizarPlataforma();
+
+// Cambio del switch
+switchElearning.addEventListener('change', actualizarElearning);
+switchApp.addEventListener('change', actualizarApp);
+switchPlataforma.addEventListener('change', actualizarPlataforma);
+
+document.addEventListener('DOMContentLoaded', function () {
+
+  const wizard = document.querySelector('#wizard-create-app');
+  const stepper = new Stepper(wizard, {
+    linear: true,
+    animation: true
+  });
+
+  const steps = [
+    'details',
+    'frameworks',
+    'database',
+    'billing',
+    'plataforma'
+  ];
+
+  // Validar campos del paso actual
+  function validarPaso(stepId) {
+
+    const paso = document.getElementById(stepId);
+    const inputs = paso.querySelectorAll('input, textarea, select');
+
+    let valido = true;
+
+    inputs.forEach(input => {
+
+      // Ignorar checkbox que no sean obligatorios
+      if (input.type === 'checkbox' && !input.required) {
+        return;
+      }
+
+      if (input.required && !input.value.trim()) {
+
+        input.classList.add('is-invalid');
+        valido = false;
+
+      } else {
+
+        input.classList.remove('is-invalid');
+
+      }
+    });
+
+    return valido;
+  }
+
+
+  // Botones siguiente
+  document.querySelectorAll('.btn-next').forEach(btn => {
+
+    btn.addEventListener('click', function (e) {
+
+      const pasoActual = steps[stepper._currentIndex];
+
+      if (validarPaso(pasoActual)) {
+
+        stepper.next();
+
+      } else {
+
+        e.preventDefault();
+
+        const primerError = document.querySelector('.is-invalid');
+
+        if (primerError) {
+          primerError.focus();
         }
-      });
+      }
 
-      registerCursorTracker({
-        input: creditCardMask1,
-        delimiter: ' '
-      });
-    }
-  }, 200);
-
-  // Expiry Date Mask
-  if (expiryDateMask1) {
-    expiryDateMask1.addEventListener('input', event => {
-      expiryDateMask1.value = formatDate(event.target.value, {
-        delimiter: '/',
-        datePattern: ['m', 'y']
-      });
     });
-    registerCursorTracker({
-      input: expiryDateMask1,
-      delimiter: '/'
+
+  });
+
+
+  // Botones anterior
+  document.querySelectorAll('.btn-prev').forEach(btn => {
+
+    btn.addEventListener('click', function () {
+      stepper.previous();
     });
-  }
 
-  // CVV
-  if (cvvMask1) {
-    cvvMask1.addEventListener('input', event => {
-      const cleanValue = event.target.value.replace(/\D/g, '');
-      cvvMask1.value = formatNumeral(cleanValue, {
-        numeral: true,
-        numeralPositiveOnly: true
-      });
+  });
+
+
+  // Bloquear cambio directo desde los tabs superiores
+  document.querySelectorAll('.step-trigger').forEach((tab, index) => {
+
+    tab.addEventListener('click', function (e) {
+
+      const pasoActual = steps[stepper._currentIndex];
+
+      // Si intenta saltar hacia adelante
+      if (index > stepper._currentIndex) {
+
+        if (!validarPaso(pasoActual)) {
+
+          e.preventDefault();
+          e.stopPropagation();
+
+          const primerError = document.querySelector('.is-invalid');
+
+          if (primerError) {
+            primerError.focus();
+          }
+
+          return false;
+        }
+      }
+
     });
-  }
-  appModal.addEventListener('show.bs.modal', function (event) {
-    const wizardCreateApp = document.querySelector('#wizard-create-app');
-    if (typeof wizardCreateApp !== undefined && wizardCreateApp !== null) {
-      // Wizard next prev button
-      const wizardCreateAppNextList = [].slice.call(wizardCreateApp.querySelectorAll('.btn-next'));
-      const wizardCreateAppPrevList = [].slice.call(wizardCreateApp.querySelectorAll('.btn-prev'));
-      const wizardCreateAppBtnSubmit = wizardCreateApp.querySelector('.btn-submit');
 
-      const createAppStepper = new Stepper(wizardCreateApp, {
-        linear: false
-      });
+  });
 
-      if (wizardCreateAppNextList) {
-        wizardCreateAppNextList.forEach(wizardCreateAppNext => {
-          wizardCreateAppNext.addEventListener('click', event => {
-            createAppStepper.next();
+
+});
+document.addEventListener('DOMContentLoaded', function () {
+  const formulario = document.getElementById('formAdministrador');
+  formulario.addEventListener('submit', function (e) {
+
+    e.preventDefault(); // <- evita el GET
+
+    const formData = new FormData(formulario);
+
+    fetch('/administradores/Guardar', {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          Swal.fire({
+            title: 'Success',
+            text: data.message,
+            icon: 'success'
           });
-        });
-      }
-      if (wizardCreateAppPrevList) {
-        wizardCreateAppPrevList.forEach(wizardCreateAppPrev => {
-          wizardCreateAppPrev.addEventListener('click', event => {
-            createAppStepper.previous();
+        } else {
+          Swal.fire({
+            title: 'Error',
+            text: data.message,
+            icon: 'error'
           });
-        });
-      }
-
-      if (wizardCreateAppBtnSubmit) {
-        wizardCreateAppBtnSubmit.addEventListener('click', event => {
-          alert('Submitted..!!');
-        });
-      }
-    }
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
   });
 });

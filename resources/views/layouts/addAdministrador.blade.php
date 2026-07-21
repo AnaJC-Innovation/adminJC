@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="../../assets/css/demo.css" />
 
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createApp">
-    Show
+    <i class="icon-base ti tabler-plus"></i> Nuevo Administrador
 </button>
 <!--/  Create App -->
 <div class="modal fade" id="createApp" tabindex="-1" aria-modal="true" role="dialog">
@@ -13,8 +13,8 @@
             <div class="modal-body">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="text-center">
-                    <h4 class="mb-2">Create App</h4>
-                    <p class="mb-5">Provide data with this form to create your app.</p>
+                    <h4 class="mb-2">Crea un administrador</h4>
+                    <p class="mb-5">Ingrese los datos del administrador.</p>
                 </div>
                 <div id="wizard-create-app" class="bs-stepper vertical mt-2 shadow-none">
                     <div class="bs-stepper-header border-0 p-1">
@@ -22,8 +22,8 @@
                             <button type="button" class="step-trigger">
                                 <span class="bs-stepper-circle"><i class="icon-base ti tabler-file-text icon-md"></i></span>
                                 <span class="bs-stepper-label">
-                                    <span class="bs-stepper-title text-uppercase">Details</span>
-                                    <span class="bs-stepper-subtitle">Enter Details</span>
+                                    <span class="bs-stepper-title text-uppercase">Datos generales</span>
+                                    <span class="bs-stepper-subtitle">Ingrese los datos generales.</span>
                                 </span>
                             </button>
                         </div>
@@ -32,8 +32,8 @@
                             <button type="button" class="step-trigger">
                                 <span class="bs-stepper-circle"><i class="icon-base ti tabler-box icon-md"></i></span>
                                 <span class="bs-stepper-label">
-                                    <span class="bs-stepper-title text-uppercase">Frameworks</span>
-                                    <span class="bs-stepper-subtitle">Select Framework</span>
+                                    <span class="bs-stepper-title text-uppercase">Datos de acceso</span>
+                                    <span class="bs-stepper-subtitle">Ingrese los datos de acceso.</span>
                                 </span>
                             </button>
                         </div>
@@ -42,8 +42,8 @@
                             <button type="button" class="step-trigger">
                                 <span class="bs-stepper-circle"><i class="icon-base ti tabler-database icon-md"></i></span>
                                 <span class="bs-stepper-label">
-                                    <span class="bs-stepper-title text-uppercase">Database</span>
-                                    <span class="bs-stepper-subtitle">Select Database</span>
+                                    <span class="bs-stepper-title text-uppercase">Datos de elearning</span>
+                                    <span class="bs-stepper-subtitle">Ingrese los datos de elearning.</span>
                                 </span>
                             </button>
                         </div>
@@ -52,97 +52,61 @@
                             <button type="button" class="step-trigger">
                                 <span class="bs-stepper-circle"><i class="icon-base ti tabler-credit-card icon-md"></i></span>
                                 <span class="bs-stepper-label">
-                                    <span class="bs-stepper-title text-uppercase">Billing</span>
-                                    <span class="bs-stepper-subtitle">Payment Details</span>
+                                    <span class="bs-stepper-title text-uppercase">Datos de app</span>
+                                    <span class="bs-stepper-subtitle">Ingrese los datos de la app.</span>
                                 </span>
                             </button>
                         </div>
                         <div class="line"></div>
-                        <div class="step" data-target="#submit">
+                        <div class="step" data-target="#plataforma">
                             <button type="button" class="step-trigger">
-                                <span class="bs-stepper-circle"><i class="icon-base ti tabler-check icon-md"></i></span>
+                                <span class="bs-stepper-circle"><i class="icon-base ti tabler-box icon-md"></i></span>
                                 <span class="bs-stepper-label">
-                                    <span class="bs-stepper-title text-uppercase">Submit</span>
-                                    <span class="bs-stepper-subtitle">Submit</span>
+                                    <span class="bs-stepper-title text-uppercase">Datos de la web</span>
+                                    <span class="bs-stepper-subtitle">Ingrese los datos de la web.</span>
                                 </span>
                             </button>
                         </div>
                     </div>
                     <div class="bs-stepper-content p-1">
-                        <form onSubmit="return false">
+                        <form id="formAdministrador" enctype="multipart/form-data">
                             <!-- Details -->
                             <div id="details" class="content pt-4 pt-lg-0">
                                 <div class="mb-6">
-                                    <label for="exampleInputEmail1" class="form-label">Application Name</label>
+                                    <label for="exampleInputEmail1" class="form-label">Siglas de cliente</label>
                                     <input
                                         type="text"
                                         class="form-control"
-                                        id="exampleInputEmail1"
-                                        placeholder="Application Name" />
+                                        name="cliente"
+                                        id="cliente"
+                                        placeholder="Application Name" required />
                                 </div>
-                                <h5>Category</h5>
-                                <ul class="p-0 m-0">
-                                    <li class="d-flex align-items-start mb-4">
-                                        <div class="badge bg-label-info p-2 me-3 rounded">
-                                            <i class="icon-base ti tabler-file-text icon-30px"></i>
-                                        </div>
-                                        <div class="d-flex justify-content-between w-100 flex-wrap gap-2">
-                                            <div class="me-2">
-                                                <h6 class="mb-1">CRM Application</h6>
-                                                <small>Scales with any business</small>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <div class="form-check form-check-inline">
-                                                    <input name="details-radio" class="form-check-input" type="radio" value="" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="d-flex align-items-start mb-4">
-                                        <div class="badge bg-label-success p-2 me-3 rounded">
-                                            <i class="icon-base ti tabler-shopping-cart icon-30px"></i>
-                                        </div>
-                                        <div class="d-flex justify-content-between w-100 flex-wrap gap-2">
-                                            <div class="me-2">
-                                                <h6 class="mb-1">eCommerce Platforms</h6>
-                                                <small>Grow Your Business With App</small>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <div class="form-check form-check-inline">
-                                                    <input
-                                                        name="details-radio"
-                                                        class="form-check-input"
-                                                        type="radio"
-                                                        value=""
-                                                        checked />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="d-flex align-items-start">
-                                        <div class="badge bg-label-danger p-2 me-3 rounded">
-                                            <i class="icon-base ti tabler-device-laptop icon-30px"></i>
-                                        </div>
-                                        <div class="d-flex justify-content-between w-100 flex-wrap gap-2">
-                                            <div class="me-2">
-                                                <h6 class="mb-1">Online Learning platform</h6>
-                                                <small>Start learning today</small>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <div class="form-check form-check-inline">
-                                                    <input name="details-radio" class="form-check-input" type="radio" value="" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
+                                <div class="mb-6">
+                                    <label for="fileLogo" class="form-label">Logo de cliente</label>
+                                    <input
+                                        type="file"
+                                        class="form-control"
+                                        id="fileLogo"
+                                        name="fileLogo"
+                                        accept="image/*"
+                                        placeholder="Logo de cliente" required />
+                                </div>
+                                <div class="mb-6">
+                                    <label for="clienteActivo" class="form-label">Cliente Activo</label>
+                                    <input
+                                        type="checkbox"
+                                        class="form-check-input"
+                                        id="clienteActivo"
+                                        name="clienteActivo"
+                                        placeholder="Cliente Activo" />
+                                </div>
                                 <div class="col-12 d-flex justify-content-between mt-6">
                                     <button class="btn btn-label-secondary btn-prev" disabled>
                                         <i class="icon-base ti tabler-arrow-left icon-xs me-sm-2 me-0"></i>
-                                        <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                                        <span class="align-middle d-sm-inline-block d-none">Anterior</span>
                                     </button>
-                                    <button class="btn btn-primary btn-next">
-                                        <span class="align-middle d-sm-inline-block d-none me-sm-2">Next</span>
+                                    <button class="btn btn-primary btn-next" type="button">
+                                        <span class="align-middle d-sm-inline-block d-none me-sm-2">Siguiente</span>
                                         <i class="icon-base ti tabler-arrow-right icon-xs"></i>
                                     </button>
                                 </div>
@@ -150,91 +114,32 @@
 
                             <!-- Frameworks -->
                             <div id="frameworks" class="content pt-4 pt-lg-0">
-                                <h5>Select Framework</h5>
-                                <ul class="p-0 m-0">
-                                    <li class="d-flex align-items-start mb-4">
-                                        <div class="badge bg-label-info p-2 me-3 rounded">
-                                            <i class="icon-base ti tabler-brand-react-native icon-30px"></i>
-                                        </div>
-                                        <div class="d-flex justify-content-between w-100">
-                                            <div class="me-2">
-                                                <h6 class="mb-1">React Native</h6>
-                                                <small>Create truly native apps</small>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <div class="form-check form-check-inline">
-                                                    <input name="frameworks-radio" class="form-check-input" type="radio" value="" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="d-flex align-items-start mb-4">
-                                        <div class="badge bg-label-danger p-2 me-3 rounded">
-                                            <i class="icon-base ti tabler-brand-angular icon-30px"></i>
-                                        </div>
-                                        <div class="d-flex justify-content-between w-100 flex-wrap gap-2">
-                                            <div class="me-2">
-                                                <h6 class="mb-1">Angular</h6>
-                                                <small>Most suited for your application</small>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <div class="form-check form-check-inline">
-                                                    <input
-                                                        name="frameworks-radio"
-                                                        class="form-check-input"
-                                                        type="radio"
-                                                        value=""
-                                                        checked="" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="d-flex align-items-start mb-4">
-                                        <div class="badge bg-label-warning p-2 me-3 rounded">
-                                            <i class="icon-base ti tabler-brand-html5 icon-30px"></i>
-                                        </div>
-                                        <div class="d-flex justify-content-between w-100 flex-wrap gap-2">
-                                            <div class="me-2">
-                                                <h6 class="mb-1">HTML</h6>
-                                                <small>Progressive Framework</small>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <div class="form-check form-check-inline">
-                                                    <input
-                                                        name="frameworks-radio"
-                                                        class="form-check-input"
-                                                        type="radio"
-                                                        value=""
-                                                        checked />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="d-flex align-items-start">
-                                        <div class="badge bg-label-success p-2 me-3 rounded">
-                                            <i class="icon-base ti tabler-brand-vue icon-30px"></i>
-                                        </div>
-                                        <div class="d-flex justify-content-between w-100 flex-wrap gap-2">
-                                            <div class="me-2">
-                                                <h6 class="mb-1">VueJs</h6>
-                                                <small>JS web frameworks</small>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <div class="form-check form-check-inline">
-                                                    <input name="frameworks-radio" class="form-check-input" type="radio" value="" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-
+                                <h5>Datos de acceso</h5>
+                                <div class="mb-6">
+                                    <label for="exampleInputEmail2" class="form-label">Correo electrónico</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="email"
+                                        name="email"
+                                        placeholder="Nombre de usuario" required />
+                                </div>
+                                <div class="mb-6">
+                                    <label for="contrasenia" class="form-label">Contraseña</label>
+                                    <input
+                                        type="password"
+                                        class="form-control"
+                                        id="contrasenia"
+                                        name="password"
+                                        placeholder="Contraseña" required />
+                                </div>
                                 <div class="col-12 d-flex justify-content-between mt-6">
                                     <button class="btn btn-label-secondary btn-prev">
                                         <i class="icon-base ti tabler-arrow-left icon-xs me-sm-2 me-0"></i>
-                                        <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                                        <span class="align-middle d-sm-inline-block d-none">Anterior</span>
                                     </button>
-                                    <button class="btn btn-primary btn-next">
-                                        <span class="align-middle d-sm-inline-block d-none me-sm-2">Next</span>
+                                    <button class="btn btn-primary btn-next" type="button">
+                                        <span class="align-middle d-sm-inline-block d-none me-sm-2">Siguiente</span>
                                         <i class="icon-base ti tabler-arrow-right icon-xs"></i>
                                     </button>
                                 </div>
@@ -242,169 +147,150 @@
 
                             <!-- Database -->
                             <div id="database" class="content pt-4 pt-lg-0">
-                                <div class="mb-6">
-                                    <label for="exampleInputEmail2" class="form-label">Database Name</label>
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        id="exampleInputEmail2"
-                                        placeholder="Database Name" />
+                                <h5>Datos de elearning</h5>
+
+                                <div class="form-check form-switch mb-6">
+                                    <input class="form-check-input"
+                                        type="checkbox"
+                                        role="switch"
+                                        id="activoElearning"
+                                        checked>
+                                    <label class="form-check-label" for="activoElearning">
+                                        ¿Se encuentra activo?
+                                    </label>
                                 </div>
-                                <h5>Select Database Engine</h5>
-                                <ul class="p-0 m-0">
-                                    <li class="d-flex align-items-start mb-4">
-                                        <div class="badge bg-label-danger p-2 me-3 rounded">
-                                            <i class="icon-base ti tabler-brand-firebase icon-30px"></i>
-                                        </div>
-                                        <div class="d-flex justify-content-between w-100 flex-wrap gap-2">
-                                            <div class="me-2">
-                                                <h6 class="mb-1">Firebase</h6>
-                                                <small>Cloud Firestone</small>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <div class="form-check form-check-inline">
-                                                    <input name="database-radio" class="form-check-input" type="radio" value="" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="d-flex align-items-start mb-4">
-                                        <div class="badge bg-label-warning p-2 me-3 rounded">
-                                            <i class="icon-base ti tabler-brand-amazon icon-30px"></i>
-                                        </div>
-                                        <div class="d-flex justify-content-between w-100 flex-wrap gap-2">
-                                            <div class="me-2">
-                                                <h6 class="mb-1">AWS</h6>
-                                                <small>Amazon Fast NoSQL Database</small>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <div class="form-check form-check-inline">
-                                                    <input
-                                                        name="database-radio"
-                                                        class="form-check-input"
-                                                        type="radio"
-                                                        value=""
-                                                        checked />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="d-flex align-items-start">
-                                        <div class="badge bg-label-info p-2 me-3 rounded">
-                                            <i class="icon-base ti tabler-database icon-30px"></i>
-                                        </div>
-                                        <div class="d-flex justify-content-between w-100 flex-wrap gap-2">
-                                            <div class="me-2">
-                                                <h6 class="mb-1">MySQL</h6>
-                                                <small>Basic MySQL database</small>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <div class="form-check form-check-inline">
-                                                    <input name="database-radio" class="form-check-input" type="radio" value="" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
+
+                                <!-- Campos que dependen del switch -->
+                                <div id="datosElearning">
+                                    <div class="mb-6">
+                                        <label for="urlElearning" class="form-label">URL de elearning</label>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="urlElearning"
+                                            name="urlElearning"
+                                            placeholder="URL de elearning">
+                                    </div>
+                                    <div class="mb-6">
+                                        <label for="detallesElearning" class="form-label">Detalles</label>
+                                        <textarea
+                                            class="form-control"
+                                            id="detallesElearning"
+                                            name="detallesElearning"
+                                            rows="3"></textarea>
+                                    </div>
+                                    <div class="mb-6">
+                                        <label for="checklistElearning" class="form-label">Checklist</label>
+                                        <textarea
+                                            class="form-control"
+                                            id="checklistElearning"
+                                            rows="3"></textarea>
+                                    </div>
+                                </div>
+
                                 <div class="col-12 d-flex justify-content-between mt-6">
-                                    <button class="btn btn-label-secondary btn-prev">
-                                        <i class="icon-base ti tabler-arrow-left icon-xs me-sm-2 me-0"></i>
-                                        <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                                    <button type="button" class="btn btn-label-secondary btn-prev">
+                                        Anterior
                                     </button>
-                                    <button class="btn btn-primary btn-next">
-                                        <span class="align-middle d-sm-inline-block d-none me-sm-2">Next</span>
-                                        <i class="icon-base ti tabler-arrow-right icon-xs"></i>
+
+                                    <button type="button" class="btn btn-primary btn-next">
+                                        Siguiente
                                     </button>
                                 </div>
                             </div>
 
                             <!-- billing -->
                             <div id="billing" class="content">
-                                <h5 class="mb-6">Payment Details</h5>
-                                <div id="AppNewCCForm" class="row g-6 pt-3 pt-lg-0 mb-6" onsubmit="return false">
-                                    <div class="col-12">
-                                        <label for="modalAppCardNumber" class="form-label">Card Number</label>
-                                        <div class="input-group input-group-merge">
-                                            <input
-                                                class="form-control app-credit-card-mask"
-                                                type="text"
-                                                placeholder="1356 3215 6548 7898"
-                                                aria-describedby="modalAppAddCard"
-                                                id="modalAppCardNumber" />
-                                            <span class="input-group-text cursor-pointer p-1" id="modalAppAddCard"><span class="app-card-type"></span></span>
+                                <h5 class="mb-6">Datos de app</h5>
+                                <div id="AppNewCCFormApp" class="row g-6 pt-3 pt-lg-0 mb-6" onsubmit="return false">
+                                    <div class="form-check form-switch mb-6">
+                                        <input class="form-check-input"
+                                            type="checkbox"
+                                            role="switch"
+                                            id="activoApp"
+                                            name="activoApp"
+                                            checked>
+                                        <label class="form-check-label" for="activoApp">
+                                            ¿Se encuentra activo la app?
+                                        </label>
+                                    </div>
+                                    <div id="datosApp">
+                                        <div class="mb-6">
+                                            <label for="detalles" class="form-label">Detalles</label>
+                                            <textarea
+                                                class="form-control"
+                                                id="detallesApp"
+                                                name="detallesApp"
+                                                placeholder="Detalles de App"
+                                                rows="3"></textarea>
+                                        </div>
+                                        <div class="mb-6">
+                                            <label for="checklist" class="form-label">Checklist</label>
+                                            <textarea
+                                                class="form-control"
+                                                id="checklistApp"
+                                                name="checklistApp"
+                                                placeholder="Checklist de elearning"
+                                                rows="3"></textarea>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-6">
-                                        <label for="modalAppUserName" class="form-label">Name on Card</label>
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            placeholder="John Doe"
-                                            id="modalAppUserName" />
+                                    <div class="col-12 d-flex justify-content-between mt-6">
+                                        <button class="btn btn-label-secondary btn-prev">
+                                            <i class="icon-base ti tabler-arrow-left icon-xs me-sm-2 me-0"></i>
+                                            <span class="align-middle d-sm-inline-block d-none">Anterior</span>
+                                        </button>
+                                        <button class="btn btn-primary btn-next" type="button">
+                                            <span class="align-middle d-sm-inline-block d-none me-sm-2">Siguiente</span>
+                                            <i class="icon-base ti tabler-arrow-right icon-xs"></i>
+                                        </button>
                                     </div>
-                                    <div class="col-6 col-md-3">
-                                        <label for="modalAppExpiry" class="form-label">Expiry</label>
-                                        <input
-                                            type="text"
-                                            class="form-control app-expiry-date-mask"
-                                            placeholder="MM/YY"
-                                            id="modalAppExpiry" />
-                                    </div>
-                                    <div class="col-6 col-md-3">
-                                        <label for="modalAppAddCardCvv" class="form-label">CVV</label>
-                                        <div class="input-group input-group-merge">
-                                            <input
-                                                type="text"
-                                                id="modalAppAddCardCvv"
-                                                class="form-control app-cvv-code-mask pe-0"
-                                                maxlength="3"
-                                                placeholder="654" />
-                                            <span class="input-group-text cursor-pointer ps-0" id="modalAppAddCardCvv2"><i
-                                                    class="text-body-secondary icon-base ti tabler-help"
-                                                    data-bs-toggle="tooltip"
-                                                    data-bs-placement="top"
-                                                    title="Card Verification Value"></i></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-check form-switch">
-                                            <input type="checkbox" class="form-check-input" id="appFutureAddress" />
-                                            <label for="appFutureAddress" class="form-label">Save card for future billing?</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 d-flex justify-content-between mt-6">
-                                    <button class="btn btn-label-secondary btn-prev">
-                                        <i class="icon-base ti tabler-arrow-left icon-xs me-sm-2 me-0"></i>
-                                        <span class="align-middle d-sm-inline-block d-none">Previous</span>
-                                    </button>
-                                    <button class="btn btn-primary btn-next">
-                                        <span class="align-middle d-sm-inline-block d-none me-sm-2">Next</span>
-                                        <i class="icon-base ti tabler-arrow-right icon-xs"></i>
-                                    </button>
                                 </div>
                             </div>
-
-                            <!-- submit -->
-                            <div id="submit" class="content text-center pt-4 pt-lg-0">
-                                <h5 class="mb-1">Submit</h5>
-                                <p class="small">Submit to kick start your project.</p>
-                                <!-- image -->
-                                <img
-                                    src="../../assets/img/illustrations/girl-with-laptop.png"
-                                    class="img-fluid"
-                                    alt="Create App img"
-                                    width="175" />
+                            <!-- plataforma -->
+                            <div id="plataforma" class="content">
+                                <h5 class="mb-6">Datos de la plataforma</h5>
+                                <div id="AppNewCCFormPlataforma" class="row g-6 pt-3 pt-lg-0 mb-6" onsubmit="return false">
+                                    <div class="form-check form-switch mb-6">
+                                        <input class="form-check-input"
+                                            type="checkbox"
+                                            role="switch"
+                                            id="activoPlataforma"
+                                            name="activoPlataforma"
+                                            checked>
+                                        <label class="form-check-label" for="activoPlataforma">
+                                            ¿Se encuentra activo la app?
+                                        </label>
+                                    </div>
+                                    <div id="datosPlataforma">
+                                        <div class="mb-6">
+                                            <label for="detalles" class="form-label">Detalles de la plataforma</label>
+                                            <textarea
+                                                class="form-control"
+                                                id="detallesPlataforma"
+                                                name="detallesPlataforma"
+                                                placeholder="Detalles de la plataforma"
+                                                rows="3"></textarea>
+                                        </div>
+                                        <div class="mb-6">
+                                            <label for="checklist" class="form-label">Checklist de la plataforma</label>
+                                            <textarea
+                                                class="form-control"
+                                                id="checklistPlataforma"
+                                                name="checklistPlataforma"
+                                                placeholder="Checklist de la plataforma"
+                                                rows="3" required></textarea>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-12 d-flex justify-content-between mt-6">
                                     <button class="btn btn-label-secondary btn-prev">
                                         <i class="icon-base ti tabler-arrow-left icon-xs me-sm-2 me-0"></i>
-                                        <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                                        <span class="align-middle d-sm-inline-block d-none">Anterior</span>
                                     </button>
                                     <button
-                                        class="btn btn-success btn-next btn-submit"
-                                        data-bs-dismiss="modal"
-                                        aria-label="Close">
-                                        <span class="align-middle">Submit</span>
+                                        class="btn btn-success btn-submit"
+                                        type="submit">
+                                        <span class="align-middle">Guardar</span>
                                     </button>
                                 </div>
                             </div>
