@@ -92,6 +92,15 @@
                                         placeholder="Logo de cliente" required />
                                 </div>
                                 <div class="mb-6">
+                                    <label for="url" class="form-label">URL de cliente</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="url"
+                                        name="url"
+                                        placeholder="URL de cliente" required />
+                                </div>
+                                <div class="mb-6">
                                     <label for="clienteActivo" class="form-label">Cliente Activo</label>
                                     <input
                                         type="checkbox"
@@ -128,10 +137,13 @@
                                     <label for="contrasenia" class="form-label">Contraseña</label>
                                     <input
                                         type="password"
-                                        class="form-control"
+                                        class="form-control @error('password') is-invalid @enderror text-white"
                                         id="contrasenia"
                                         name="password"
                                         placeholder="Contraseña" required />
+                                    <span class="input-group-text cursor-pointer">
+                                        <i class="icon-base ti tabler-eye-off"></i>
+                                    </span>
                                 </div>
                                 <div class="col-12 d-flex justify-content-between mt-6">
                                     <button class="btn btn-label-secondary btn-prev">
@@ -301,3 +313,4 @@
         </div>
     </div>
 </div>
+@include('layouts.modal')

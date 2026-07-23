@@ -59,6 +59,7 @@
 
     <!-- Page CSS -->
     <link rel="stylesheet" href="../../assets/vendor/css/pages/cards-advance.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Helpers -->
     <script src="../../assets/vendor/js/helpers.js"></script>

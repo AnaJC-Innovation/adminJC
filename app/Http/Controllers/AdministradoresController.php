@@ -12,9 +12,19 @@ use Illuminate\Http\Request;
 
 class AdministradoresController extends Controller
 {
+
     public function data()
     {
-        return response()->json(Administrador::all());
+        $administradores = DB::table('administradors')
+            ->join('cliente_sesion', 'administradors.id', '=',  'cliente_sesion.cliente_id')
+            ->join('descripciones_checks', 'descripciones_checks.id', '=',  'cliente_sesion.descripcion_id')
+            ->select(
+                'administradors.*',
+                'descripciones_checks.*'
+            )
+            ->get();
+
+        return response()->json($administradores);
     }
     public function Guardar(Request $request)
     {
@@ -33,7 +43,7 @@ class AdministradoresController extends Controller
             $administrador = Administrador::create([
                 'logo' => $logoName,
                 'cliente' => $request->cliente,
-                'url' => $request->cliente,
+                'url' => $request->url,
                 'user' => $request->email,
                 'password' => $request->password,
                 'activo' => $request->has('clienteActivo') ? 1 : 0,

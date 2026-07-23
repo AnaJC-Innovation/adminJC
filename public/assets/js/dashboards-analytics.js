@@ -716,39 +716,273 @@ function cargarAdministradores() {
     }
   });
 }
-function ingresarAdministrador(url) {
-  con
-  window.open(url, '_blank');
+function verDetallesAdministrador(admin) {
+  if (
+    !admin.descripcionelearning &&
+    !admin.checklistelearning &&
+    !admin.descripcionApp &&
+    !admin.checklistApp &&
+    !admin.descripcionWeb &&
+    !admin.checklistWeb
+  ) {
+    return;
+  } else {
+    // Mostrar modal
+    $('#detallesAdministrador').modal('show');
+
+    $('#detallesAdministrador .titulo').text('Detalles del administrador');
+    $('#detallesAdministrador .instrucciones').text('Aqui se muestran los detalles/Checklist del administrador');
+
+    for (const key in admin) {
+      if (admin[key] !== '' && key != 'id' && key != 'logo' && key != 'cliente' && key != 'user' && key != 'password' && key != 'url' && key != 'activo' && key != 'updated_at' && key != 'created_at' && key != 'checklistelearning' && key != 'checklistApp' && key != 'checklistWeb') {
+        let titulo = key;
+        let descripcion = '';
+        let checklist = '';
+        if (key === 'descripcionelearning') {
+          titulo = 'Elearning';
+          descripcion = admin.descripcionelearning;
+          checklist = admin.checklistelearning;
+        } else if (key === 'descripcionApp') {
+          titulo = 'App';
+          descripcion = admin.descripcionApp;
+          checklist = admin.checklistApp;
+        } else if (key === 'descripcionWeb') {
+          titulo = 'Web';
+          descripcion = admin.descripcionWeb;
+          checklist = admin.checklistWeb;
+        }
+
+        const stepperHeader = `
+        <div class="step" data-target="#${titulo}">
+          <button type="button" class="step-trigger">
+            <span class="bs-stepper-circle"><i class="icon-base ti tabler-file-text icon-md"></i></span>
+            <span class="bs-stepper-label">
+              <span class="bs-stepper-title text-uppercase">${titulo}</span>
+              <span class="bs-stepper-subtitle">Ingrese los datos generales.</span>
+            </span>
+          </button>
+        </div>
+        `;
+        $('#detallesAdministrador .stepperHeader').append(stepperHeader);
+
+        const stepperContent = `
+          <div id="${titulo}" class="content pt-4 pt-lg-0">
+             <div class="mb-6">
+               <label for="exampleInputEmail1" class="form-label">Descripción del ${titulo}</label>
+               <textarea class="form-control" rows="3" disabled>${descripcion}</textarea>
+             </div>
+             <div class="mb-6">
+               <label for="exampleInputEmail1" class="form-label">Checklist del ${titulo}</label>
+               <textarea class="form-control" rows="3" disabled>${checklist}</textarea>
+             </div>
+             <div class="col-12 d-flex justify-content-between mt-6">
+               <button class="btn btn-label-secondary btn-anterior" disabled>
+                 <i class="icon-base ti tabler-arrow-left icon-xs me-sm-2 me-0"></i>
+                 <span class="align-middle d-sm-inline-block d-none">Anterior</span>
+               </button>
+               <button class="btn btn-primary btn-siguiente" type="button">
+                 <span class="align-middle d-sm-inline-block d-none me-sm-2">Siguiente</span>
+                 <i class="icon-base ti tabler-arrow-right icon-xs"></i>
+               </button>
+             </div>
+          </div>
+        `;
+        $('#detallesAdministrador .stepperContent').append(stepperContent);
+      }
+    }
+  }
 }
-function verDetallesAdministrador(id) {
-  console.log(id);
-}
+
 function pintarCards(datos) {
   let html = '';
   datos.forEach(admin => {
     html += `
-          <div class="card mb-3 col-md-4 col-3 col-sm-6">
-            <div class="card-header text-center p-4">
-              <img src="${admin.logo}" alt="Logo" class="img-fluid">
-            </div>
-            <div class="card-body text-center p-4">
-              <h5 class="card-title">${admin.cliente}</h5>
-              <p class="card-text">Super Administrador</p>
-              <p class="card-text">${admin.user}</p>
-            </div>
-            <div class="card-footer text-center p-4">
-              <button class="btn btn-primary w-100 mb-2" onclick="ingresarAdministrador(${admin.url})">
-                <i class="ti tabler-login icon-base"></i> Ingresar
-              </button>
-              <button class="btn btn-outline-primary w-100 mb-2" onclick="verDetallesAdministrador(${admin.id})">
+    <div class="card mb-3 col-md-4 col-3 col-sm-6">
+      <div class="card-header text-center p-4">
+        <img src="./logos/${admin.logo}" alt="Logo" class="img-fluid">
+      </div>
+      <div class="card-body text-center p-4">
+        <h5 class="card-title">${admin.cliente}</h5>
+        <p class="card-text">Super Administrador</p>
+        <p class="card-text">${admin.user}</p>
+      </div>
+      <div class="card-footer text-center p-4">
+        <button class="btn btn-primary w-100 mb-2" onclick="ingresarAdministradorURL('${admin.url}')">
+          <i class="ti tabler-login icon-base"></i> Ingresar
+        </button>
+        ${admin.descripcionelearning != '' ||
+        admin.checklistelearning != '' ||
+        admin.descripcionApp != '' ||
+        admin.checklistApp != '' ||
+        admin.descripcionWeb != '' ||
+        admin.checklistWeb != ''
+        ? `
+              <button class="btn btn-outline-primary w-100 mb-2" onclick='verDetallesAdministrador(${JSON.stringify(admin)})'>
                 <i class="ti tabler-eye icon-base"></i> Ver detalles
-              </button> 
-            </div>
-          </div>
-      `;
+              </button>
+            `
+        : ''
+      }
+      </div>
+    </div>
+  `;
   });
   $('#contenedorAdministradores').html(html);
 }
 $(function () {
   cargarAdministradores();
+});
+
+
+'use strict';
+
+let wizardDetails = null;
+
+// ===============================
+// Inicializar Stepper
+// ===============================
+function inicializarWizardDetalles() {
+
+  const wizard = document.querySelector('#wizard-details');
+
+  if (!wizard) return;
+
+  if (wizardDetails) {
+    wizardDetails.destroy();
+  }
+
+  wizardDetails = new Stepper(wizard, {
+    linear: false,
+    animation: true
+  });
+
+}
+
+// ===============================
+// Obtener pasos dinámicamente
+// ===============================
+function obtenerPasos() {
+  return [...document.querySelectorAll('#wizard-details .content')];
+}
+
+// ===============================
+// Validar paso actual
+// ===============================
+function validarPasoActual() {
+
+  const pasos = obtenerPasos();
+
+  if (!pasos.length) return true;
+
+  const paso = pasos[wizardDetails._currentIndex];
+
+  if (!paso) return true;
+
+  let valido = true;
+
+  paso.querySelectorAll('input, textarea, select').forEach(input => {
+
+    // Ignorar campos deshabilitados
+    if (input.disabled) return;
+
+    // Ignorar checkbox opcionales
+    if (input.type === 'checkbox' && !input.required) return;
+
+    const valor = input.value ? input.value.trim() : '';
+
+    if (input.required && valor === '') {
+
+      input.classList.add('is-invalid');
+      valido = false;
+
+    } else {
+
+      input.classList.remove('is-invalid');
+
+    }
+
+  });
+
+  return valido;
+
+}
+
+// ===============================
+// Cuando se abre el modal
+// ===============================
+$('#detallesAdministrador').on('shown.bs.modal', function () {
+
+  inicializarWizardDetalles();
+
+});
+
+// ===============================
+// Botón siguiente
+// ===============================
+$(document).off('click', '.btn-siguiente').on('click', '.btn-siguiente', function (e) {
+
+  e.preventDefault();
+
+  if (!wizardDetails) return;
+
+  if (validarPasoActual()) {
+
+    wizardDetails.next();
+
+  } else {
+
+    const primerError = document.querySelector('#wizard-details .is-invalid');
+
+    if (primerError) {
+      primerError.focus();
+    }
+
+  }
+
+});
+
+// ===============================
+// Botón anterior
+// ===============================
+$(document).off('click', '.btn-anterior').on('click', '.btn-anterior', function (e) {
+
+  e.preventDefault();
+
+  if (!wizardDetails) return;
+
+  wizardDetails.previous();
+
+});
+
+// ===============================
+// Bloquear click en los headers
+// ===============================
+$(document).off('click', '#wizard-details .step-trigger').on('click', '#wizard-details .step-trigger', function (e) {
+
+  if (!wizardDetails) return;
+
+  const pasos = obtenerPasos();
+
+  const step = $(this).closest('.step')[0];
+
+  const indice = $('#wizard-details .step').index(step);
+
+  if (indice > wizardDetails._currentIndex) {
+
+    if (!validarPasoActual()) {
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      const primerError = document.querySelector('#wizard-details .is-invalid');
+
+      if (primerError) {
+        primerError.focus();
+      }
+
+      return false;
+    }
+
+  }
+
 });

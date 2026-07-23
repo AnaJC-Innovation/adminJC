@@ -167,7 +167,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   });
 
-
   // Bloquear cambio directo desde los tabs superiores
   document.querySelectorAll('.step-trigger').forEach((tab, index) => {
 
@@ -195,43 +194,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
     });
 
-  });
-
-
-});
-document.addEventListener('DOMContentLoaded', function () {
-  const formulario = document.getElementById('formAdministrador');
-  formulario.addEventListener('submit', function (e) {
-
-    e.preventDefault(); // <- evita el GET
-
-    const formData = new FormData(formulario);
-
-    fetch('/administradores/Guardar', {
-      method: 'POST',
-      body: formData,
-      headers: {
-        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-      }
-    })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          Swal.fire({
-            title: 'Success',
-            text: data.message,
-            icon: 'success'
-          });
-        } else {
-          Swal.fire({
-            title: 'Error',
-            text: data.message,
-            icon: 'error'
-          });
-        }
-      })
-      .catch(error => {
-        console.error(error);
-      });
   });
 });
