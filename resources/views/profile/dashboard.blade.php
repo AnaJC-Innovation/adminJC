@@ -21,25 +21,7 @@
             <!-- Content wrapper -->
             <div class="content-wrapper">
                 <!-- Content -->
-                <div class="container-xxl flex-grow-1 container-p-y">
-                    <div class="row mb-4">
-                        <div class="col-md-6 ">
-                            <h3 class="card-title text-bold">Administradores</h3>
-                            <p>Gestiona y accede a los administradores del sistema.</p>
-                        </div>
-                        <div class="col-md-3">
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="buscarAdministrador"
-                                placeholder="Buscar administrador...">
-                        </div>
-                        <div class="col-md-3">
-                            @include('layouts.addAdministrador')
-                        </div>
-                    </div>
-                    <div class="row" id="contenedorAdministradores"></div>
-                </div>
+                @include('profile.partials.main')
                 <!-- / Content -->
 
                 <!-- Footer -->

@@ -417,7 +417,7 @@
                         <div class="dropdown-divider my-1 mx-n2"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="pages-profile-user.html">
+                        <a class="dropdown-item" href="/profile">
                             <i class="icon-base ti tabler-user me-3 icon-md"></i><span class="align-middle">My Profile</span>
                         </a>
                     </li>
@@ -426,30 +426,20 @@
                             <i class="icon-base ti tabler-settings me-3 icon-md"></i><span class="align-middle">Settings</span>
                         </a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a class="dropdown-item" href="pages-account-settings-billing.html">
                             <span class="d-flex align-items-center align-middle">
                                 <i class="flex-shrink-0 icon-base ti tabler-file-dollar me-3 icon-md"></i><span class="flex-grow-1 align-middle">Billing</span>
                                 <span class="flex-shrink-0 badge bg-danger d-flex align-items-center justify-content-center">4</span>
                             </span>
                         </a>
-                    </li>
+                    </li> -->
                     <li>
                         <div class="dropdown-divider my-1 mx-n2"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="pages-pricing.html">
-                            <i class="icon-base ti tabler-currency-dollar me-3 icon-md"></i><span class="align-middle">Pricing</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="pages-faq.html">
-                            <i class="icon-base ti tabler-question-mark me-3 icon-md"></i><span class="align-middle">FAQ</span>
-                        </a>
-                    </li>
-                    <li>
                         <div class="d-grid px-2 pt-2 pb-1">
-                            <a class="btn btn-sm btn-danger d-flex" href="auth-login-cover.html" target="_blank">
+                            <a class="btn btn-sm btn-danger d-flex" href="/logout">
                                 <small class="align-middle">Logout</small>
                                 <i class="icon-base ti tabler-logout ms-2 icon-14px"></i>
                             </a>

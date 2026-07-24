@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -56,5 +57,21 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+    public function updatesave(Request $request): RedirectResponse
+    {
+        $photoName = '1.png';
+        if ($request->hasFile('upload')) {
+            $photo = $request->file('upload');
+            $photoName = time() . '.' . $photo->getClientOriginalExtension();
+            $photo->move(public_path('photos'), $photoName);
+        }
+        $request->user()->update([
+            'name' => $request->firstName,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'photo' => $photoName,
+        ]);
+        return Redirect::route('profile.dashboard')->with('status', 'profile-updated');
     }
 }

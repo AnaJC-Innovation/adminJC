@@ -73,7 +73,7 @@
 <body style="background:linear-gradient(90deg, rgba(122, 94, 159, .9) 15%, rgba(49, 70, 145, .85) 51%) !important; color: #fff !important;">
     <div class="authentication-wrapper authentication-cover">
         <!-- Logo -->
-        <a href="index.html" class="app-brand auth-cover-brand text-white">
+        <a href="/" class="app-brand auth-cover-brand text-white">
             <span class="app-brand-logo demo">
                 <span class="text-primary">
                     <!-- <svg width="32" height="22" viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -177,7 +177,7 @@
                             @enderror
 
                         </div>
-                        <div class="my-8">
+                        <!-- <div class="my-8">
                             <div class="d-flex justify-content-between">
                                 <div class="form-check mb-0 ms-2">
                                     <input
@@ -191,12 +191,12 @@
                                     <p class="mb-0 text-white">Forgot Password?</p>
                                 </a>
                             </div>
-                        </div>
+                        </div> -->
                         <button type="submit" class="btn btn-primary d-grid w-100">
                             Iniciar sesión
                         </button>
                     </form>
-
+                    <!-- 
                     <p class="text-center text-white">
                         <span>New on our platform?</span>
                         <a href="auth-register-cover.html">
@@ -204,7 +204,7 @@
                         </a>
                     </p>
 
-                    <!-- <div class="divider my-6">
+                    <div class="divider my-6">
                         <div class="divider-text">or</div>
                     </div>
                     <div class="d-flex justify-content-center">
