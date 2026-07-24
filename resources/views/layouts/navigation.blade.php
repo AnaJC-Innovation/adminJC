@@ -91,7 +91,7 @@
             <!-- / Style Switcher-->
 
             <!-- Quick links  -->
-            <li class="nav-item dropdown-shortcuts navbar-dropdown dropdown">
+            <!-- <li class="nav-item dropdown-shortcuts navbar-dropdown dropdown">
                 <a
                     class="nav-link dropdown-toggle hide-arrow btn btn-icon btn-text-secondary rounded-pill"
                     href="javascript:void(0);"
@@ -180,9 +180,6 @@
                     </div>
                 </div>
             </li>
-            <!-- Quick links -->
-
-            <!-- Notification -->
             <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-2">
                 <a
                     class="nav-link dropdown-toggle hide-arrow btn btn-icon btn-text-secondary rounded-pill"
@@ -384,7 +381,7 @@
                         </div>
                     </li>
                 </ul>
-            </li>
+            </li> -->
             <!--/ Notification -->
 
             <!-- User -->
@@ -424,12 +421,12 @@
                     </li>
                     <li>
                         <a class="dropdown-item" href="/profile">
-                            <i class="icon-base ti tabler-user me-3 icon-md"></i><span class="align-middle">My Profile</span>
+                            <i class="icon-base ti tabler-user me-3 icon-md"></i><span class="align-middle">Mi Perfil</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" href="pages-account-settings-account.html">
-                            <i class="icon-base ti tabler-settings me-3 icon-md"></i><span class="align-middle">Settings</span>
+                            <i class="icon-base ti tabler-settings me-3 icon-md"></i><span class="align-middle">Configuración</span>
                         </a>
                     </li>
                     <!-- <li>
@@ -446,7 +443,7 @@
                     <li>
                         <div class="d-grid px-2 pt-2 pb-1">
                             <a class="btn btn-sm btn-danger d-flex" href="/logout">
-                                <small class="align-middle">Logout</small>
+                                <small class="align-middle">Cerrar sesión</small>
                                 <i class="icon-base ti tabler-logout ms-2 icon-14px"></i>
                             </a>
                         </div>

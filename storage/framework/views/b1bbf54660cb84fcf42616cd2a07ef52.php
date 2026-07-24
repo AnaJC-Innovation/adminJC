@@ -1,3 +1,7 @@
+<?php $__env->startSection('title'); ?>
+<?php echo e(config('app.name', 'Administrador JC')); ?>
+
+<?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
 <div class="layout-wrapper layout-content-navbar  ">
     <div class="layout-container">

@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+{{ config('app.name', 'Administrador JC') }}
+@endsection
 @section('content')
 <div class="layout-wrapper layout-content-navbar  ">
     <div class="layout-container">
