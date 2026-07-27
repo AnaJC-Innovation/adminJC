@@ -63,17 +63,17 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
 
     <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
-    <script src="<?php echo e(asset('assets/vendor/js/template-customizer.js')); ?>"></script>
+    <!-- <script src="<?php echo e(asset('assets/vendor/js/template-customizer.js')); ?>"></script> -->
 
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
 
     <script src="<?php echo e(asset('assets/js/config.js')); ?>"></script>
 </head>
 
-<body>
+<body style="background:linear-gradient(90deg, rgba(122, 94, 159, .9) 15%, rgba(49, 70, 145, .85) 51%) !important; color: #fff !important;">
     <div class="authentication-wrapper authentication-cover">
         <!-- Logo -->
-        <a href="index.html" class="app-brand auth-cover-brand">
+        <a href="/" class="app-brand auth-cover-brand text-white">
             <span class="app-brand-logo demo">
                 <span class="text-primary">
                     <!-- <svg width="32" height="22" viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -102,7 +102,7 @@
                     </svg> -->
                 </span>
             </span>
-            <span class="app-brand-text demo text-heading fw-bold">Administrador JC</span>
+            <span class="app-brand-text demo fw-bold text-white">Administrador JC</span>
         </a>
         <!-- /Logo -->
         <div class="authentication-inner row m-0">
@@ -110,66 +110,124 @@
             <div class="d-none d-xl-flex col-xl-8 p-0">
                 <div class="auth-cover-bg d-flex justify-content-center align-items-center">
                     <img
-                        src="<?php echo e(asset('assets/img/illustrations/auth-login-illustration-light.png')); ?>"
+                        src="https://jc-innovation.com/static/media/JC-Congresos-y-convenciones-blanco.122d364de3e071a1757b.png"
                         alt="auth-login-cover"
                         class="my-5 auth-illustration"
-                        data-app-light-img="<?php echo e(asset('assets/img/illustrations/auth-login-illustration-light.png')); ?>"
-                        data-app-dark-img="<?php echo e(asset('assets/img/illustrations/auth-login-illustration-dark.png')); ?>" style="visibility: visible!important;" />
-                    <img
+                        data-app-light-img="https://jc-innovation.com/static/media/JC-Congresos-y-convenciones-blanco.122d364de3e071a1757b.png"
+                        data-app-dark-img="https://jc-innovation.com/static/media/JC-Congresos-y-convenciones-blanco.122d364de3e071a1757b.png" style="visibility: visible!important; width: 100% !important;  padding-left: 20% !important;" || />
+                    <!-- <img
                         src="<?php echo e(asset('assets/img/illustrations/bg-shape-image-light.png')); ?>"
                         alt="auth-login-cover"
                         class="platform-bg"
                         data-app-light-img="<?php echo e(asset('assets/img/illustrations/bg-shape-image-light.png')); ?>"
-                        data-app-dark-img="<?php echo e(asset('assets/img/illustrations/bg-shape-image-dark.png')); ?>" />
+                        data-app-dark-img="<?php echo e(asset('assets/img/illustrations/bg-shape-image-dark.png')); ?>" /> -->
                 </div>
             </div>
             <!-- /Left Text -->
-
             <!-- Login -->
             <div class="d-flex col-12 col-xl-4 align-items-center authentication-bg p-sm-12 p-6">
                 <div class="w-px-400 mx-auto mt-12 pt-5">
-                    <h4 class="mb-1">Sistema de Gestión JC</h4>
-                    <p class="mb-6">Por favor, inicie sesión para continuar</p>
+                    <h4 class="mb-1 text-white">Sistema de Gestión JC</h4>
+                    <p class="mb-6 text-white">Por favor, inicie sesión para continuar</p>
 
-                    <form id="formAuthentication" class="mb-6" action="index.html" method="GET">
-                        <div class="mb-6 form-control-validation">
-                            <label for="email" class="form-label">Correo Electrónico</label>
+                    <form id="formAuthentication" class="mb-6" method="POST" action="<?php echo e(route('login')); ?>">
+                        <?php echo csrf_field(); ?>
+                        <div class="mb-6">
+                            <label for="email" class="form-label text-white">Correo Electrónico</label>
                             <input
-                                type="text"
-                                class="form-control"
+                                type="email"
+                                class="form-control <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?> text-white"
                                 id="email"
-                                name="email-username"
-                                placeholder="Enter your email or username"
-                                autofocus />
+                                name="email"
+                                value="<?php echo e(old('email')); ?>"
+                                placeholder="Correo electrónico"
+                                required
+                                autofocus>
+
+                            <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <div class="invalid-feedback">
+                                <?php echo e($message); ?>
+
+                            </div>
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                         </div>
-                        <div class="mb-6 form-password-toggle form-control-validation">
-                            <label class="form-label" for="password">Contraseña</label>
+                        <div class="mb-6 form-password-toggle">
+                            <label class="form-label text-white" for="password">
+                                Contraseña
+                            </label>
+
                             <div class="input-group input-group-merge">
                                 <input
                                     type="password"
                                     id="password"
-                                    class="form-control"
                                     name="password"
-                                    placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                    aria-describedby="password" />
-                                <span class="input-group-text cursor-pointer"><i class="icon-base ti tabler-eye-off"></i></span>
+                                    class="form-control <?php $__errorArgs = ['password'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?> text-white"
+                                    placeholder="********"
+                                    required>
+
+                                <span class="input-group-text cursor-pointer">
+                                    <i class="icon-base ti tabler-eye-off"></i>
+                                </span>
+
                             </div>
+
+                            <?php $__errorArgs = ['password'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <div class="invalid-feedback d-block">
+                                <?php echo e($message); ?>
+
+                            </div>
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+
                         </div>
-                        <div class="my-8">
+                        <!-- <div class="my-8">
                             <div class="d-flex justify-content-between">
                                 <div class="form-check mb-0 ms-2">
-                                    <input class="form-check-input" type="checkbox" id="remember-me" />
-                                    <label class="form-check-label" for="remember-me"> Remember Me </label>
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        name="remember"
+                                        id="remember-me">
+                                    <label class="form-check-label text-white" for="remember-me"> Remember Me </label>
                                 </div>
                                 <a href="auth-forgot-password-cover.html">
-                                    <p class="mb-0">Forgot Password?</p>
+                                    <p class="mb-0 text-white">Forgot Password?</p>
                                 </a>
                             </div>
-                        </div>
-                        <button class="btn btn-primary d-grid w-100">Sign in</button>
+                        </div> -->
+                        <button type="submit" class="btn btn-primary d-grid w-100">
+                            Iniciar sesión
+                        </button>
                     </form>
-
-                    <p class="text-center">
+                    <!-- 
+                    <p class="text-center text-white">
                         <span>New on our platform?</span>
                         <a href="auth-register-cover.html">
                             <span>Create an account</span>
@@ -179,7 +237,6 @@
                     <div class="divider my-6">
                         <div class="divider-text">or</div>
                     </div>
-
                     <div class="d-flex justify-content-center">
                         <a href="javascript:;" class="btn btn-icon rounded-circle btn-text-facebook me-1_5">
                             <i class="icon-base ti tabler-brand-facebook-filled icon-20px"></i>
@@ -196,7 +253,7 @@
                         <a href="javascript:;" class="btn btn-icon rounded-circle btn-text-google-plus">
                             <i class="icon-base ti tabler-brand-google-filled icon-20px"></i>
                         </a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <!-- /Login -->

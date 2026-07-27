@@ -1,0 +1,65 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\ProfileUpdateRequest;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\View\View;
+use Illuminate\Support\Facades\Hash;
+
+class ProfileController extends Controller
+{
+    /**
+     * Display the user's profile form.
+     */
+    public function edit(Request $request): View
+    {
+        return view('profile.edit', [
+            'user' => $request->user(),
+        ]);
+    }
+
+    /**
+     * Update the user's profile information.
+     */
+
+    /**
+     * Delete the user's account.
+     */
+    public function destroy(Request $request): RedirectResponse
+    {
+        $request->validateWithBag('userDeletion', [
+            'password' => ['required', 'current_password'],
+        ]);
+
+        $user = $request->user();
+
+        Auth::logout();
+
+        $user->delete();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return Redirect::to('/');
+    }
+    public function updatesave(Request $request): RedirectResponse
+    {
+        $photo = '../../assets/img/avatars/1.png';
+        if ($request->hasFile('upload')) {
+            $photo = $request->file('upload');
+            $photoName = time() . '.' . $photo->getClientOriginalExtension();
+            $photo->move(public_path('photos'), $photoName);
+        }
+        $request->user()->update([
+            'name' => $request->firstName,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'photo' => $photo,
+        ]);
+        return Redirect::route('profile.edit')->with('status', 'profile-dashboard');
+    }
+}

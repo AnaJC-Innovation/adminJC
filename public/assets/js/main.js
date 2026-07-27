@@ -4,6 +4,19 @@
 
 'use strict';
 
+function showSweetAlert(title, text, icon) {
+  Swal.fire({
+    title: title,
+    text: text,
+    icon: icon
+  }).then(() => {
+    location.reload();
+  });
+}
+function ingresarAdministradorURL(url) {
+  window.open(url, '_blank');
+}
+
 window.isRtl = window.Helpers.isRtl();
 window.isDarkStyle = window.Helpers.isDarkStyle();
 let menu,
@@ -122,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let layoutCollapsedVal = window.Helpers.isCollapsed() ? 'collapsed' : 'expanded';
             layoutCollapsedCustomizerOptions.querySelector(`input[value="${layoutCollapsedVal}"]`).click();
           }
-        } catch (e) {}
+        } catch (e) { }
       }
     });
   });
@@ -424,7 +437,7 @@ document.addEventListener('DOMContentLoaded', function () {
             localStorage.getItem('templateCustomizer-' + templateName + '--LayoutCollapsed') === 'true',
             false
           );
-      } catch (e) {}
+      } catch (e) { }
     }
   }
 })();
@@ -519,22 +532,22 @@ function initializeAutocomplete() {
           <div class="p-5 p-lg-12">
             <div class="row g-4">
               ${Object.entries(data.suggestions || {}).map(
-                ([section, items]) => html`
+          ([section, items]) => html`
                   <div class="col-md-6 suggestion-section">
                     <p class="search-headings mb-2">${section}</p>
                     <div class="suggestion-items">
                       ${items.map(
-                        item => html`
+            item => html`
                           <a href="${item.url}" class="suggestion-item d-flex align-items-center">
                             <i class="icon-base ti ${item.icon}"></i>
                             <span>${item.name}</span>
                           </a>
                         `
-                      )}
+          )}
                     </div>
                   </div>
                 `
-              )}
+        )}
             </div>
           </div>
         `;
@@ -648,12 +661,12 @@ function initializeAutocomplete() {
                       <small class="text-body-secondary">${item.subtitle}</small>
                     </div>
                     ${item.meta
-                      ? html`
+                    ? html`
                           <div class="position-absolute end-0 me-4">
                             <span class="text-body-secondary small">${item.meta}</span>
                           </div>
                         `
-                      : ''}
+                    : ''}
                   </a>
                 `;
               }

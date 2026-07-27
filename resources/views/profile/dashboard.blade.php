@@ -1,0 +1,44 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="layout-wrapper layout-content-navbar  ">
+    <div class="layout-container">
+        <!-- Menu -->
+        @include('layouts.aside')
+
+        <div class="menu-mobile-toggler d-xl-none rounded-1">
+            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large text-bg-secondary p-2 rounded-1">
+                <i class="ti tabler-menu icon-base"></i>
+                <i class="ti tabler-chevron-right icon-base"></i>
+            </a>
+        </div>
+        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+            <!-- Navbar -->
+            @include('layouts.navigation')
+            <!-- Content wrapper -->
+            <div class="content-wrapper">
+                <!-- Content -->
+                @include('profile.partials.main')
+                <!-- / Content -->
+
+                <!-- Footer -->
+                @include('layouts.footer')
+                <!-- / Footer -->
+
+                <div class="content-backdrop fade"></div>
+            </div>
+            <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+    </div>
+
+    <!-- Overlay -->
+    <!-- <div class="layout-overlay layout-menu-toggle"></div> -->
+
+    <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+    <!-- <div class="drag-target"></div> -->
+</div>
+@endsection
