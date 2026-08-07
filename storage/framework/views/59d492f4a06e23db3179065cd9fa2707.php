@@ -22,13 +22,13 @@
             </a>
         </li>
         <li class="menu-item">
-            <a href="app-chat.html" class="menu-link text-white">
+            <a href="<?php echo e(route('elearning.dashboard')); ?>" class="menu-link text-white">
                 <i class="menu-icon icon-base ti tabler-apps"></i>
                 <div data-i18n="Chat">App</div>
             </a>
         </li>
         <li class="menu-item">
-            <a href="app-calendar.html" class="menu-link text-white">
+            <a href="<?php echo e(route('web.dashboard')); ?>" class="menu-link text-white">
                 <i class="menu-icon fa-solid fa-user-graduate ti tabler-device-laptop"></i>
                 <div data-i18n="Calendar">Web</div>
             </a>

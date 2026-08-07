@@ -135,23 +135,66 @@
                                 </div>
                                 <div class="mb-6">
                                     <label for="contrasenia" class="form-label">Contraseña</label>
-                                    <input
-                                        type="password"
-                                        class="form-control <?php $__errorArgs = ['password'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?> text-white"
-                                        id="contrasenia"
-                                        name="password"
-                                        placeholder="Contraseña" required />
-                                    <span class="input-group-text cursor-pointer">
-                                        <i class="icon-base ti tabler-eye-off"></i>
-                                    </span>
+
+                                    <div class="input-group">
+                                        <input
+                                            type="password"
+                                            class="form-control"
+                                            id="contrasenia"
+                                            name="password"
+                                            placeholder="Contraseña"
+                                            required>
+
+                                        <span class="input-group-text cursor-pointer" id="togglePassword">
+                                            <i class="ti tabler-eye-off" id="iconPassword"></i>
+                                        </span>
+                                    </div>
+
+                                    <small id="passwordError" class="text-danger d-none">
+                                        La contraseña debe ser alfanumérica y contener al menos una letra y un número.
+                                    </small>
                                 </div>
+                                <script>
+                                    const password = document.getElementById('contrasenia');
+                                    const error = document.getElementById('passwordError');
+
+                                    password.addEventListener('input', function() {
+
+                                        // Solo letras y números, al menos una letra y un número
+                                        const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/;
+
+                                        if (password.value === "") {
+                                            password.classList.remove('is-valid', 'is-invalid');
+                                            error.classList.add('d-none');
+                                            return;
+                                        }
+
+                                        if (regex.test(password.value)) {
+                                            password.classList.remove('is-invalid');
+                                            password.classList.add('is-valid');
+                                            error.classList.add('d-none');
+                                        } else {
+                                            password.classList.remove('is-valid');
+                                            password.classList.add('is-invalid');
+                                            error.classList.remove('d-none');
+                                        }
+                                    });
+                                    document.getElementById('togglePassword').addEventListener('click', function() {
+                                        const password = document.getElementById('contrasenia');
+                                        const icon = document.getElementById('iconPassword');
+
+                                        if (password.type === 'password') {
+                                            password.type = 'text';
+                                            icon.classList.remove('tabler-eye-off');
+                                            icon.classList.add('tabler-eye');
+                                        } else {
+                                            password.type = 'password';
+                                            icon.classList.remove('tabler-eye');
+                                            icon.classList.add('tabler-eye-off');
+                                        }
+                                    });
+                                </script>
+                                </script>
                                 <div class="col-12 d-flex justify-content-between mt-6">
                                     <button class="btn btn-label-secondary btn-prev">
                                         <i class="icon-base ti tabler-arrow-left icon-xs me-sm-2 me-0"></i>
@@ -163,11 +206,9 @@ unset($__errorArgs, $__bag); ?> text-white"
                                     </button>
                                 </div>
                             </div>
-
                             <!-- Database -->
                             <div id="database" class="content pt-4 pt-lg-0">
                                 <h5>Datos de elearning</h5>
-
                                 <div class="form-check form-switch mb-6">
                                     <input class="form-check-input"
                                         type="checkbox"
@@ -178,7 +219,6 @@ unset($__errorArgs, $__bag); ?> text-white"
                                         ¿Se encuentra activo?
                                     </label>
                                 </div>
-
                                 <!-- Campos que dependen del switch -->
                                 <div id="datosElearning">
                                     <div class="mb-6">

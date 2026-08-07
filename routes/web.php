@@ -23,6 +23,14 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/elearning', function () {
+    return view('elearning.dashboard');
+})->middleware(['auth', 'verified'])->name('elearning.dashboard');
+
+Route::get('/web', function () {
+    return view('web.dashboard');
+})->middleware(['auth', 'verified'])->name('web.dashboard');
+
 Route::get('/administradores/data', [AdministradoresController::class, 'data'])
     ->name('administradores.data');
 

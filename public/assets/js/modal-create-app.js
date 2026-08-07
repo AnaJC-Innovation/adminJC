@@ -100,6 +100,29 @@ document.addEventListener('DOMContentLoaded', function () {
     'plataforma'
   ];
 
+  function validarPassword() {
+    const password = document.getElementById('contrasenia');
+    const error = document.getElementById('passwordError');
+
+    // Mínimo 8 caracteres, al menos una letra y un número, solo alfanumérico
+    const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+    const valido = regex.test(password.value);
+
+    if (valido) {
+      password.classList.remove('is-invalid');
+      password.classList.add('is-valid');
+      error.classList.add('d-none');
+    } else {
+      password.classList.remove('is-valid');
+      password.classList.add('is-invalid');
+      error.classList.remove('d-none');
+    }
+
+    return valido;
+  }
+
+  password.addEventListener('input', validarPassword);
   // Validar campos del paso actual
   function validarPaso(stepId) {
 
@@ -115,7 +138,21 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
 
-      if (input.required && !input.value.trim()) {
+      // Validación para la contraseña
+      if (input.id === 'contrasenia') {
+
+        const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/;
+
+        if (!regex.test(input.value)) {
+          input.classList.add('is-invalid');
+          input.classList.remove('is-valid');
+          valido = false;
+        } else {
+          input.classList.remove('is-invalid');
+          input.classList.add('is-valid');
+        }
+
+      } else if (input.required && !input.value.trim()) {
 
         input.classList.add('is-invalid');
         valido = false;
