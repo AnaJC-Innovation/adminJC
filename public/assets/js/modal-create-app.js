@@ -196,3 +196,50 @@ document.addEventListener('DOMContentLoaded', function () {
 
   });
 });
+document.getElementById('formAdministrador').addEventListener('submit', async function (e) {
+  e.preventDefault();
+
+  const form = this;
+  const formData = new FormData(form);
+
+  try {
+      const response = await fetch('administradores/Guardar', {
+          method: 'POST',
+          headers: {
+              'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+              'Accept': 'application/json'
+          },
+          body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        const modalElement = document.getElementById('createApp');
+        const modal = bootstrap.Modal.getInstance(modalElement);
+
+        if (modal) {
+            modal.hide();
+        }
+        Swal.fire({
+            icon: 'success',
+            title: '¡Guardado correctamente!',
+            text: data.message || 'El administrador se guardó correctamente.',
+            confirmButtonText: 'Aceptar'
+        }).then((result) => {
+
+            if (result.isConfirmed) {
+                window.location.reload();
+            }
+
+        });
+
+      } else {
+          alert(data.message || 'Ocurrió un error al guardar.');
+      }
+
+  } catch (error) {
+      console.error(error);
+      alert('Error al enviar el formulario.');
+  }
+});

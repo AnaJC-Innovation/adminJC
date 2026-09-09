@@ -14,65 +14,65 @@ document.addEventListener('DOMContentLoaded', function () {
           username: {
             validators: {
               notEmpty: {
-                message: 'Please enter username'
+                message: 'Por favor, ingrese el nombre de usuario'
               },
               stringLength: {
                 min: 6,
-                message: 'Username must be more than 6 characters'
+                message: 'El nombre de usuario debe tener más de 6 caracteres'
               }
             }
           },
           email: {
             validators: {
               notEmpty: {
-                message: 'Please enter your email'
+                message: 'Por favor, ingrese su correo electrónico'
               },
               emailAddress: {
-                message: 'Please enter a valid email address'
+                message: 'Por favor, ingrese una dirección de correo electrónico válida'
               }
             }
           },
           'email-username': {
             validators: {
               notEmpty: {
-                message: 'Please enter email / username'
+                message: 'Por favor, ingrese su correo electrónico o nombre de usuario'
               },
               stringLength: {
                 min: 6,
-                message: 'Username must be more than 6 characters'
+                message: 'El nombre de usuario debe tener más de 6 caracteres'
               }
             }
           },
           password: {
             validators: {
               notEmpty: {
-                message: 'Please enter your password'
+                message: 'Por favor, ingrese su contraseña'
               },
               stringLength: {
                 min: 6,
-                message: 'Password must be more than 6 characters'
+                message: 'La contraseña debe tener más de 6 caracteres'
               }
             }
           },
           'confirm-password': {
             validators: {
               notEmpty: {
-                message: 'Please confirm password'
+                message: 'Por favor, confirme su contraseña'
               },
               identical: {
                 compare: () => formAuthentication.querySelector('[name="password"]').value,
-                message: 'The password and its confirmation do not match'
+                message: 'La contraseña y su confirmación no coinciden'
               },
               stringLength: {
                 min: 6,
-                message: 'Password must be more than 6 characters'
+                message: 'La contraseña debe tener más de 6 caracteres'
               }
             }
           },
           terms: {
             validators: {
               notEmpty: {
-                message: 'Please agree to terms & conditions'
+                message: 'Por favor, acepte los términos y condiciones'
               }
             }
           }

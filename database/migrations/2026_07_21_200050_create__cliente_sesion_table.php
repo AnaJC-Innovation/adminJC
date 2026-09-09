@@ -13,8 +13,15 @@ return new class extends Migration
     {
         Schema::create('cliente_sesion', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cliente_id')->constrained('administradors');
-            $table->foreignId('descripcion_id')->constrained('descripciones_check');
+
+            $table->foreignId('cliente_id')
+                ->constrained('administradors')
+                ->onDelete('cascade');
+
+            $table->foreignId('descripcion_id')
+                ->constrained('descripciones_checks')
+                ->onDelete('cascade');
+
             $table->timestamps();
         });
     }
@@ -24,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('_cliente_sesion');
+        Schema::dropIfExists('cliente_sesion');
     }
 };
